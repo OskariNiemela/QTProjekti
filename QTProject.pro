@@ -25,9 +25,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-    mainmenu.cpp
+    mainmenu.cpp \
+    mapmode.cpp \
+    maptile.cpp \
+    map.cpp \
+    player.cpp
 
 HEADERS += \
-    mainmenu.h
+    mainmenu.h \
+    mapmode.h \
+    maptile.h \
+    coordinate.h \
+    map.h \
+    player.h
 
 FORMS +=
