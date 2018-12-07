@@ -1,4 +1,5 @@
 #include "mainmenu.h"
+#include "mapmode.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
@@ -6,6 +7,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     menu::MainMenu menu;
 
-    menu.show();
+    mapSpace::MapMode screen;
+
     return a.exec();
 }

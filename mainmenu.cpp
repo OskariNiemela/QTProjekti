@@ -35,6 +35,8 @@ void MainMenu::InitializeMenu()
     layout_->addWidget(startGame_);
     layout_->addWidget(exitGame_);
 
+    connect(exitGame_,&QPushButton::clicked,this,&MainMenu::close);
+
     setLayout(layout_);
 }
 

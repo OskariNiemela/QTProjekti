@@ -5,8 +5,9 @@
 
 namespace player
 {
-class Player: public QGraphicsObject
+class Player: public QObject, public QGraphicsObject
 {
+    Q_OBJECT
 public:
     Player();
 

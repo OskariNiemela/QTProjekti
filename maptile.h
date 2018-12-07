@@ -6,6 +6,8 @@
 #include <QGraphicsItem>
 #include <QPainter>
 #include <QObject>
+#include <map>
+#include <memory>
 
 namespace mapSpace
 {
@@ -16,8 +18,7 @@ class MapTile : public QObject, public QGraphicsItem
     Q_OBJECT
     Q_INTERFACES(QGraphicsItem)
 public:
-    MapTile();
-    virtual ~MapTile();
+    explicit MapTile();
 
     virtual QRectF boundingRect() const;
     virtual void paint(QPainter *painter,
@@ -25,11 +26,18 @@ public:
                        QWidget *widget);
     virtual QPainterPath shape() const;
 
-    void setPosition(map::Coordinate);
+    void setPosition(mapSpace::Coordinate coord);
+
+    void addNeighbour(mapSpace::Coordinate neighbourCoord,std::shared_ptr<MapTile> tile);
+
+    mapSpace::Coordinate giveCoord() const;
 
 private:
     int x_;
     int y_;
+    mapSpace::Coordinate coord_;
+
+    std::map<mapSpace::Coordinate,std::shared_ptr<MapTile>> neighbours;
 
     bool open_;
     bool empty_;
