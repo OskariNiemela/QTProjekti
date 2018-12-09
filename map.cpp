@@ -2,7 +2,8 @@
 namespace mapSpace
 {
 Map::Map():
-    scene_(new QGraphicsScene)
+    scene_(new QGraphicsScene),
+    playerStart_(Coordinate(1,1))
 {
     initMap();
 }
@@ -35,11 +36,33 @@ void Map::initMap()
 
         }
     }
+    Coordinate playerCoord(1,1);
+    playerStart_ = playerCoord;
 }
 
 QGraphicsScene* Map::giveScene()
 {
     return scene_;
+}
+
+Coordinate Map::givePlayerStart() const
+{
+    return playerStart_;
+}
+
+bool Map::mapTileIsMovable(Coordinate coord)
+{
+    if(currMap.find(coord) != currMap.end())
+    {
+        return !currMap.find(coord)->second->impassable();
+    }
+    return false;
+}
+
+void Map::playerComes(Coordinate coord)
+{
+    currMap.find(coord)->second->playerComin();
+    scene_->update();
 }
 }
 

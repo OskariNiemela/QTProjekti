@@ -3,19 +3,46 @@
 namespace mapSpace
 {
 
-MapTile::MapTile()
+MapTile::MapTile():
+    open_(false),
+    impassable_(false)
 {
 
 }
 
 QRectF MapTile::boundingRect() const
 {
-    return QRectF(-TILE_SIZE,-TILE_SIZE,TILE_SIZE,TILE_SIZE);
+    return QRectF(0,0,TILE_SIZE,TILE_SIZE);
 }
 
 void MapTile::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    QRect rect(-TILE_SIZE,-TILE_SIZE,TILE_SIZE,TILE_SIZE);
+
+
+    if(!impassable_)
+    {
+        if(open_)
+        {
+            //Draw the stuff on the tile
+
+        }
+        else
+        {
+            QColor gray(100,100,100);
+            QBrush brush(gray);
+            painter->setBrush(brush);
+            //Draw a gray background
+
+        }
+    }
+    else
+    {
+        QColor black(255,255,255);
+        QBrush brush(black);
+        painter->setBrush(brush);
+        //Draw a blackbackground
+    }
+    QRect rect(0,0,TILE_SIZE,TILE_SIZE);
 
     painter->drawRect(rect);
 }
@@ -45,6 +72,17 @@ void MapTile::addNeighbour(Coordinate neighbourCoord, std::shared_ptr<MapTile> t
 Coordinate MapTile::giveCoord() const
 {
     return coord_;
+}
+
+void MapTile::playerComin()
+{
+    open_ = true;
+    update();
+}
+
+bool MapTile::impassable()
+{
+    return impassable_;
 }
 
 

@@ -2,6 +2,7 @@
 #define MAPMODE_H
 
 #include "map.h"
+#include "player.h"
 
 #include <QGraphicsView>
 #include <QGraphicsScene>
@@ -9,7 +10,7 @@
 #include <QWidget>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
-
+#include <QPushButton>
 #include <QGridLayout>
 
 #include <QPixmap>
@@ -26,6 +27,13 @@ public:
     MapMode();
     void initMap();
     void initLayouts();
+    void movePlayer(mapSpace::Coordinate coord);
+public slots:
+    void movePlayerNorth();
+    void movePlayerWest();
+    void movePlayerSouth();
+    void movePlayerEast();
+
 private:
     QGraphicsView* view_;
 
@@ -36,6 +44,10 @@ private:
     QVBoxLayout* screenControls_;
 
     QWidget* widget_;
+    QWidget* controlWidget_;
+
+    player::Player* player_;
+    mapSpace::Map* map_;
 };
 }
 

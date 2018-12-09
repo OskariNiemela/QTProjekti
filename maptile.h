@@ -32,6 +32,10 @@ public:
 
     mapSpace::Coordinate giveCoord() const;
 
+    void playerComin();
+
+    bool impassable();
+
 private:
     int x_;
     int y_;
@@ -40,7 +44,7 @@ private:
     std::map<mapSpace::Coordinate,std::shared_ptr<MapTile>> neighbours;
 
     bool open_;
-    bool empty_;
+    bool impassable_;
 
 
 };
