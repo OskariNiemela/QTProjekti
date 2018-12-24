@@ -19,6 +19,7 @@ void Map::initMap()
         {
             Coordinate newCoord(xCoord,yCoord);
             std::shared_ptr<MapTile> newTile = std::make_shared<MapTile>();
+            connect(newTile.get(),&mapSpace::MapTile::giveDesc,this,&Map::getSceneDesc);
             scene_->addItem(newTile.get());
             newTile->setPosition(newCoord);
             int y = 0;
@@ -38,6 +39,11 @@ void Map::initMap()
     }
     Coordinate playerCoord(1,1);
     playerStart_ = playerCoord;
+}
+
+void Map::getSceneDesc(std::string desc)
+{
+    emit giveSceneDesc(desc);
 }
 
 QGraphicsScene* Map::giveScene()

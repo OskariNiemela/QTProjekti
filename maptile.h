@@ -36,6 +36,7 @@ public:
 
     bool impassable();
 
+
 private:
     int x_;
     int y_;
@@ -46,7 +47,11 @@ private:
     bool open_;
     bool impassable_;
 
+    std::string desc_;
 
+    void setDesc();
+signals:
+    void giveDesc(std::string);
 };
 
 }

@@ -10,7 +10,8 @@ MapMode::MapMode():
     screenControls_(new QVBoxLayout),
     widget_ (new QWidget),
     controlWidget_(new QWidget),
-    player_(new player::Player)
+    player_(new player::Player),
+    desc_(new description::TextDescription)
 {
     initLayouts();
     initMap();
@@ -20,6 +21,8 @@ void MapMode::initMap()
 {
     map_ = new mapSpace::Map();
 
+
+    connect(map_,&mapSpace::Map::giveSceneDesc,desc_,&description::TextDescription::changeText);
     QGraphicsScene* scene = map_->giveScene();
     scene->addItem(player_);
     player_->setCoordinate(map_->givePlayerStart());
@@ -42,7 +45,7 @@ void MapMode::initMap()
 
 
     mainLayout_->addLayout(screenControls_);
-
+    mainLayout_->addWidget(desc_);
     widget_->setLayout(mainLayout_);
 
     widget_->show();

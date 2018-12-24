@@ -5,13 +5,16 @@
 
 #include <map>
 #include <QGraphicsScene>
+#include <QObject>
 #include <string>
 #include <memory>
+#include <string>
 
 namespace mapSpace
 {
-class Map
+class Map : public QObject
 {
+    Q_OBJECT
 public:
     Map();
 
@@ -25,6 +28,11 @@ private:
     mapSpace::Coordinate playerStart_;
 
     void initMap();
+
+signals:
+    void giveSceneDesc(std::string);
+public slots:
+    void getSceneDesc(std::string desc);
 };
 }
 

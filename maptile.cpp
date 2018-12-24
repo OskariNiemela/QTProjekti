@@ -7,7 +7,7 @@ MapTile::MapTile():
     open_(false),
     impassable_(false)
 {
-
+    setDesc();
 }
 
 QRectF MapTile::boundingRect() const
@@ -78,11 +78,17 @@ void MapTile::playerComin()
 {
     open_ = true;
     update();
+    emit giveDesc(desc_);
 }
 
 bool MapTile::impassable()
 {
     return impassable_;
+}
+
+void MapTile::setDesc()
+{
+    desc_ = "You see open space to the north, west, south and east";
 }
 
 

@@ -29,7 +29,8 @@ SOURCES += \
     mapmode.cpp \
     maptile.cpp \
     map.cpp \
-    player.cpp
+    player.cpp \
+    textdescription.cpp
 
 HEADERS += \
     mainmenu.h \
@@ -37,6 +38,7 @@ HEADERS += \
     maptile.h \
     coordinate.h \
     map.h \
-    player.h
+    player.h \
+    textdescription.h
 
 FORMS +=

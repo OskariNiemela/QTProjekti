@@ -3,6 +3,7 @@
 
 #include "map.h"
 #include "player.h"
+#include "textdescription.h"
 
 #include <QGraphicsView>
 #include <QGraphicsScene>
@@ -48,6 +49,7 @@ private:
 
     player::Player* player_;
     mapSpace::Map* map_;
+    description::TextDescription* desc_;
 };
 }
 
