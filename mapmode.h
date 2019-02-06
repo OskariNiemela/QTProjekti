@@ -27,6 +27,7 @@ class MapMode : public QObject
 public:
     MapMode();
     void initMap();
+    void initBattle();
     void initLayouts();
     void movePlayer(mapSpace::Coordinate coord);
 public slots:
@@ -37,19 +38,30 @@ public slots:
 
 private:
     QGraphicsView* view_;
+    QGraphicsView* battleView_;
+
 
     QGridLayout* movementLayout_;
     QGridLayout* battleLayout_;
 
     QHBoxLayout* mainLayout_;
+    QHBoxLayout* battleScreen_;
+    QVBoxLayout* battleVBox_;
+
     QVBoxLayout* screenControls_;
 
     QWidget* widget_;
     QWidget* controlWidget_;
+    QWidget* battleWidget_;
+    QWidget* battleControl_;
 
     player::Player* player_;
     mapSpace::Map* map_;
     description::TextDescription* desc_;
+
+    Combat::Battle* currentBattle_;
+
+    void goIntoBattle();
 };
 }
 

@@ -21,11 +21,12 @@ public:
     QGraphicsScene *giveScene();
     mapSpace::Coordinate givePlayerStart() const;
     bool mapTileIsMovable(mapSpace::Coordinate coord);
-    void playerComes(mapSpace::Coordinate coord);
+    Combat::Battle* playerComes(mapSpace::Coordinate coord);
 private:
     std::map<mapSpace::Coordinate,std::shared_ptr<mapSpace::MapTile>> currMap;
     QGraphicsScene* scene_;
     mapSpace::Coordinate playerStart_;
+    Combat::Battle* currentBattle_;
 
     void initMap();
 

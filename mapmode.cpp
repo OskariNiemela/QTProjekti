@@ -4,9 +4,11 @@ namespace mapSpace
 {
 MapMode::MapMode():
     view_(new QGraphicsView),
+    battleView_(new QGraphicsView),
     movementLayout_(new QGridLayout),
     battleLayout_(new QGridLayout),
     mainLayout_(new QHBoxLayout),
+    battleVBox_(new QVBoxLayout),
     screenControls_(new QVBoxLayout),
     widget_ (new QWidget),
     controlWidget_(new QWidget),
@@ -26,7 +28,6 @@ void MapMode::initMap()
     QGraphicsScene* scene = map_->giveScene();
     scene->addItem(player_);
     player_->setCoordinate(map_->givePlayerStart());
-    map_->playerComes(map_->givePlayerStart());
     view_->setScene(map_->giveScene());
 
     QColor colour(100,100,100);
@@ -49,6 +50,8 @@ void MapMode::initMap()
     widget_->setLayout(mainLayout_);
 
     widget_->show();
+
+    movePlayer(map_->givePlayerStart());
 }
 
 void MapMode::initLayouts()
@@ -81,6 +84,18 @@ void MapMode::initLayouts()
     movementLayout_->addWidget(inventory,1,4,1,3);
     movementLayout_->addWidget(save,2,4,1,2);
 
+    QPushButton* attack = new QPushButton;
+    QPushButton* abilities = new QPushButton;
+    QPushButton* useItem = new QPushButton;
+
+    attack->setText("Attack");
+    abilities->setText("Abilities");
+    useItem->setText("Item");
+
+    battleLayout_->addWidget(attack,0,0,4,1);
+    battleLayout_->addWidget(abilities,0,1,4,1);
+    battleLayout_->addWidget(useItem,0,2,4,1);
+
 }
 
 void MapMode::movePlayer(Coordinate coord)
@@ -88,8 +103,13 @@ void MapMode::movePlayer(Coordinate coord)
     if(map_->mapTileIsMovable(coord))
     {
         //TO DO Check for doors
-        map_->playerComes(coord);
+        currentBattle_ = map_->playerComes(coord);
         player_->setCoordinate(coord);
+
+        if (currentBattle_ != nullptr)
+        {
+            goIntoBattle();
+        }
     }
 }
 
@@ -131,6 +151,31 @@ void MapMode::movePlayerEast()
     mapSpace::Coordinate coord(x,y);
 
     movePlayer(coord);
+}
+
+void MapMode::goIntoBattle()
+{
+    widget_->hide();
+    //delete (widget_);
+
+    battleWidget_ = new QWidget;
+    battleControl_ = new QWidget;
+    battleScreen_ = new QHBoxLayout;
+    desc_->changeText(currentBattle_->enterBattle());
+    view_ = battleView_;
+
+    battleVBox_->addWidget(view_);
+    battleVBox_->addLayout(battleLayout_);
+
+
+    battleControl_->setLayout(battleVBox_);
+
+    battleScreen_->addWidget(battleControl_);
+
+    battleScreen_->addWidget(desc_);
+
+    battleWidget_->setLayout(battleScreen_);
+    battleWidget_->show();
 }
 
 }

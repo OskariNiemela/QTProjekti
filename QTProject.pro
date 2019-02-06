@@ -30,7 +30,11 @@ SOURCES += \
     maptile.cpp \
     map.cpp \
     player.cpp \
-    textdescription.cpp
+    textdescription.cpp \
+    battlemode.cpp \
+    enemy.cpp \
+    skelton.cpp \
+    battle.cpp
 
 HEADERS += \
     mainmenu.h \
@@ -39,6 +43,10 @@ HEADERS += \
     coordinate.h \
     map.h \
     player.h \
-    textdescription.h
+    textdescription.h \
+    battlemode.h \
+    enemy.h \
+    skelton.h \
+    battle.h
 
 FORMS +=

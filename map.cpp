@@ -65,10 +65,11 @@ bool Map::mapTileIsMovable(Coordinate coord)
     return false;
 }
 
-void Map::playerComes(Coordinate coord)
+Combat::Battle* Map::playerComes(Coordinate coord)
 {
-    currMap.find(coord)->second->playerComin();
+    Combat::Battle* yes = currMap.find(coord)->second->playerComin();
     scene_->update();
+    return yes;
 }
 }
 

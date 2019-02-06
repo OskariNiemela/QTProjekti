@@ -1,7 +1,8 @@
 #ifndef MAPTILE_H
 #define MAPTILE_H
 
-#include"coordinate.h"
+#include "coordinate.h"
+#include "battle.h"
 
 #include <QGraphicsItem>
 #include <QPainter>
@@ -32,10 +33,10 @@ public:
 
     mapSpace::Coordinate giveCoord() const;
 
-    void playerComin();
+    Combat::Battle* playerComin();
 
     bool impassable();
-
+    Combat::Battle giveBattle();
 
 private:
     int x_;
@@ -43,6 +44,8 @@ private:
     mapSpace::Coordinate coord_;
 
     std::map<mapSpace::Coordinate,std::shared_ptr<MapTile>> neighbours;
+
+    Combat::Battle* battle_;
 
     bool open_;
     bool impassable_;

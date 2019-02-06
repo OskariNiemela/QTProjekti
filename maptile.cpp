@@ -74,11 +74,12 @@ Coordinate MapTile::giveCoord() const
     return coord_;
 }
 
-void MapTile::playerComin()
+Combat::Battle* MapTile::playerComin()
 {
     open_ = true;
     update();
     emit giveDesc(desc_);
+    return battle_;
 }
 
 bool MapTile::impassable()
@@ -88,7 +89,9 @@ bool MapTile::impassable()
 
 void MapTile::setDesc()
 {
+    //To Do:: Check which ways are open/available on map;
     desc_ = "You see open space to the north, west, south and east";
+    battle_ = new Combat::Battle();
 }
 
 
